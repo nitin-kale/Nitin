@@ -99,7 +99,7 @@ import javafx.embed.swing.JFXPanel;
 //<UtilDateModel> 
 public class General extends getResultSet {
 
-	JFrame MessageFrame;
+	JFrame MessageFrame ;
 	public static String mydrive;
 	public JWindow mywindow;
 	public static String rArticle = " ";
