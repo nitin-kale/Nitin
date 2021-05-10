@@ -1,0 +1,68 @@
+package RetailProduct;
+
+import java.io.File;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+
+public class XML_ReadXML {
+
+	public void getAllUserNames(String fileName) {
+		try {
+			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+			DocumentBuilder db = dbf.newDocumentBuilder();
+			File file = new File(fileName);
+			if (file.exists()) {
+				Document doc = db.parse(file);
+				Element docEle = doc.getDocumentElement();
+
+				// Print root element of the document
+				System.out.println("Root element of the document: " + docEle.getNodeName());
+
+				// NodeList studentList = docEle.getElementsByTagName("TO");
+				NodeList studentList = docEle.getChildNodes();
+
+				// Print total student elements in document
+				System.out.println("Total students: " + studentList.getLength());
+
+				if (studentList != null && studentList.getLength() > 0) {
+					for (int i = 0; i < studentList.getLength(); i++) {
+
+						Node node = studentList.item(i);
+
+						if (node.getNodeType() == Node.ELEMENT_NODE) {
+
+							System.out.println("=====================");
+
+							Element e = (Element) node;
+							NodeList nodeList = e.getElementsByTagName("Row");
+							System.out.println("Name: " + nodeList.item(0).getChildNodes().item(0).getNodeValue());
+
+							// Element e = (Element) node;
+							nodeList = e.getElementsByTagName("Company_Code");
+							System.out.println("Name: " + nodeList.item(0).getChildNodes().item(0).getNodeValue());
+
+						}
+					}
+				}
+			} else {
+				new General().msg("File Not Found Please Check..." + "" + fileName);
+				System.exit(1);
+			}
+		} catch (Exception e) {
+			System.out.println(e);
+			System.out.println(e.getMessage());
+		}
+	}
+
+	public static void main(String[] args) {
+
+		XML_ReadXML parser = new XML_ReadXML();
+		parser.getAllUserNames("d:\\AKN\\Files\\TO\\TO200017_1002.xml");
+	}
+}
