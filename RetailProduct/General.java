@@ -605,7 +605,7 @@ public class General extends getResultSet {
 		if (fname.length() > ln) {
 			Result = "Fail";
 			
-			new General().msg("Length of field is " + fname + "is not allow more then" + ln);
+			new General().msg("  Length of field is " + fname + "is not allow more then" + ln);
 		}
 		return Result;
 	}
